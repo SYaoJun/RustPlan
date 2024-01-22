@@ -9,6 +9,9 @@ edition = "2021"
 rand='0.8.5 '
 chrono='0.4'
 sled = "0.34.0"
+zstd = "0.13.0"
+clap = "2.33"
+
 
 [[bin]]
 name = "main"
@@ -23,6 +26,10 @@ path = "src/mythread.rs"
 [[bin]]
 name = "sled_test"
 path = "src/sled_test.rs"
+
+[[bin]]
+name = "zstd_test"
+path = "src/zstd_test.rs"
 
 [[test]]
 name = "my_module_test"
