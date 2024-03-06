@@ -1,0 +1,4 @@
+# kundb
+```shell
+cargo run 
+```
