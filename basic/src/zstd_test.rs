@@ -1,5 +1,4 @@
 use std::io::{self, Write};
-use zstd;
 
 fn compress(input: &[u8]) -> Vec<u8> {
     zstd::encode_all(input, 0).expect("Compression failed")

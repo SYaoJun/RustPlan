@@ -1,14 +1,14 @@
-fn main(){
+fn main() {
     let mut a: Option<i32> = None;
     // 存入
     a = Some(18);
     // 取出
     match a {
-         Some(x)=> {
+        Some(x) => {
             println!("value = {}", x);
-         }, 
-        None =>{
+        }
+        None => {
             println!("None");
-        } 
+        }
     }
 }

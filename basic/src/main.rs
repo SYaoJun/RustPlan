@@ -7,17 +7,21 @@ fn main() {
         .author("Your Name")
         .about("A simple Rust application using clap")
         // 添加一个命令行参数
-        .arg(Arg::with_name("input")
-            .short("i")
-            .long("input")
-            .value_name("FILE")
-            .help("Sets the input file to use")
-            .takes_value(true))
+        .arg(
+            Arg::with_name("input")
+                .short("i")
+                .long("input")
+                .value_name("FILE")
+                .help("Sets the input file to use")
+                .takes_value(true),
+        )
         // 添加一个标志
-        .arg(Arg::with_name("verbose")
-            .short("v")
-            .long("verbose")
-            .help("Sets the level of verbosity"))
+        .arg(
+            Arg::with_name("verbose")
+                .short("v")
+                .long("verbose")
+                .help("Sets the level of verbosity"),
+        )
         .get_matches();
 
     // 处理命令行参数
