@@ -1,16 +1,17 @@
 
 type Link<T> = Option<Box<Node<T>>>;
-
+/*链表类*/
 pub struct List<T>{
     size: usize,
     head: Link<T>,
 }
-
+/*节点类*/
 pub struct Node<T>{
     elem: T,
     next: Link<T>,
 }
 
+/*实现节点类*/
 impl<T> List<T>{
     fn new()->Self{
         Self{
@@ -18,10 +19,11 @@ impl<T> List<T>{
             head: None
         }
     }
+    /*判断是否为空，引用类型*/
     fn is_empty(&self)->bool{
         self.size == 0
     }
-    
+    /*加入元素*/
     fn push(&mut self, elem: T){
         let node = Box::new(Node{
             elem: elem,
