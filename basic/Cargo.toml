@@ -38,3 +38,11 @@ path="src/option.rs"
 [[bin]]
 name="match"
 path="src/match.rs"
+
+[[bin]]
+name="mytrait"
+path="src/mytrait.rs"
+
+[[bin]]
+name = "closure"
+path = "src/closure.rs"

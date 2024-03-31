@@ -1,6 +1,6 @@
 # 基础知识
 - 变量
-- 借用
+- mut
 - 生命周期
 - 字符串
 - 标准库(Vec,String,HashMap)
@@ -13,6 +13,10 @@
 - 单元测试
 - 代码格式化
 - 文件读写
+- Traits
+- Methods
+- Lifetime
+- 'static
 ## 创建结构体
 ```sh
 struct User {
@@ -49,4 +53,13 @@ fn main(){
 ```sh
  cargo run --bin option
 ```
-
+## mut
+```
+fn main() {
+    let mut n = Number {
+        odd: true,
+        value: 17,
+    }
+    n.value = 19; // all good
+}
+```

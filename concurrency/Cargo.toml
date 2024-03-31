@@ -1,0 +1,15 @@
+[package]
+name = "concurrency"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name="list"
+path="src/list.rs"
+[[bin]]
+name="thread"
+path="src/thread.rs"
+
+[[bin]]
+name="safe_list"
+path="src/safe_list.rs"
