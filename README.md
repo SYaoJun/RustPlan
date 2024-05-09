@@ -1,7 +1,8 @@
 # Rust Study
 - Rust是一种类型安全的系统级编程语言
-- [参考博客](https://juejin.cn/post/6973310351349645319)
-- [参考博客](https://geektutu.com/post/quick-rust.html)
+## 目录
+1. rust版hello world
+2. lib库函数
 ### 知识点
 1. 变量
 2. 函数
@@ -15,7 +16,10 @@
 rustc --version
 cargo --version
 ```
-# 编译
+### 编译
 ```
 rustc hello_world.rs
 ```
+## 参考文档
+- [参考博客](https://juejin.cn/post/6973310351349645319)
+- [参考博客](https://geektutu.com/post/quick-rust.html)
