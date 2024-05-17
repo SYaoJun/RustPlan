@@ -1,26 +1,74 @@
-pub fn reverse(input: &str) -> String {
-    // 字符和字节还是有区别的，“子猫”是两个字符，如果纯看input的长度，那么n是6，所以要先转换为字符的长度
-    let mut res: Vec<char> = input.chars().collect();
-    let n = res.len();
-    if n == 0 {
-        return input.to_string();
-    }
+use grade_school as school;
 
-    let mut i = 0;
-    let mut j = n - 1;
-    println!("n = {}", n);
-    while i < j {
-        let c = res[i];
-        res[i] = res[j];
-        res[j] = c;
+fn to_owned(v: &[&str]) -> Vec<String> {
+    v.iter().map(|s| s.to_string()).collect()
+}
+#[test]
+fn grades_for_empty_school() {
+    let s = school::School::new();
+    assert_eq!(s.grades(), vec![]);
+}
+#[test]
+fn grades_for_one_student() {
+    let mut s = school::School::new();
+    s.add(2, "Aimee");
+    assert_eq!(s.grades(), vec![2]);
+}
+#[test]
+fn grades_for_several_students_are_sorted() {
+    let mut s = school::School::new();
+    s.add(2, "Aimee");
+    s.add(7, "Logan");
+    s.add(4, "Blair");
+    assert_eq!(s.grades(), vec![2, 4, 7]);
+}
+// 这个grades要设计成哈希表吗？还要去重？
+#[test]
+fn grades_when_several_students_have_the_same_grade() {
+    let mut s = school::School::new();
+    s.add(2, "Aimee");
+    s.add(2, "Logan");
+    s.add(2, "Blair");
+    assert_eq!(s.grades(), vec![2]);
+}
+#[test]
+fn grade_for_empty_school() {
+    let s = school::School::new();
+    assert_eq!(s.grade(1), Vec::<String>::new());
+}
+#[test]
+fn grade_when_no_students_have_that_grade() {
+    let mut s = school::School::new();
+    s.add(7, "Logan");
+    assert_eq!(s.grade(1), Vec::<String>::new());
+}
+#[test]
 
-        i += 1;
-        j -= 1;
-    }
+fn grade_for_one_student() {
+    let mut s = school::School::new();
+    s.add(2, "Aimee");
+    assert_eq!(s.grade(2), to_owned(&["Aimee"]));
+}
+#[test]
 
-    res.into_iter().collect()
+fn grade_returns_students_sorted_by_name() {
+    let mut s = school::School::new();
+    s.add(2, "James");
+    s.add(2, "Blair");
+    s.add(2, "Paul");
+    assert_eq!(s.grade(2), to_owned(&["Blair", "James", "Paul"]));
+}
+#[test]
+
+fn add_students_to_different_grades() {
+    let mut s = school::School::new();
+    s.add(3, "Chelsea");
+    s.add(7, "Logan");
+    assert_eq!(s.grades(), vec![3, 7]);
+    assert_eq!(s.grade(3), to_owned(&["Chelsea"]));
+    assert_eq!(s.grade(7), to_owned(&["Logan"]));
 }
 
 fn main() {
-    println!("{}", reverse("子猫")); // 输出："猫子"
+
 }
