@@ -1,5 +1,5 @@
-use std::sync::{Arc, Mutex};
 use std::collections::LinkedList;
+use std::sync::{Arc, Mutex};
 use std::thread;
 
 // 创建一个包含 Mutex 和 LinkedList 的结构体，用于表示线程安全的链表
@@ -7,7 +7,7 @@ struct ThreadSafeList<T> {
     inner: Arc<Mutex<LinkedList<T>>>,
 }
 
-impl<T:std::fmt::Debug> ThreadSafeList<T> {
+impl<T: std::fmt::Debug> ThreadSafeList<T> {
     // 创建一个新的线程安全链表
     fn new() -> Self {
         ThreadSafeList {
