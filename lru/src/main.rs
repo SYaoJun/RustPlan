@@ -9,6 +9,7 @@ struct LRUReplacer {
     lru_list: VecDeque<FrameId>,
     // 哈希表 key frequent
     lru_map: HashMap<FrameId, usize>,
+    latch: Mutex<()>,
 }
 
 impl LRUReplacer {
@@ -17,10 +18,12 @@ impl LRUReplacer {
             total_pages: num_pages,
             lru_list: VecDeque::new(),
             lru_map: HashMap::new(),
+            latch: Mutex::new(()),
         }
     }
 
     fn victim(&mut self) -> Option<FrameId> {
+        let _guard = self.latch.lock().unwrap();
         if self.lru_list.is_empty(){
             return None;
         }
@@ -36,6 +39,7 @@ impl LRUReplacer {
     fn pin(&mut self, frame_id: FrameId) {
         // pin了之后，就需要从哈希表中移除，哈希表的key是frame_id，value是在双端队列中的下标
         // 从双端链表中移除
+        let _guard = self.latch.lock().unwrap();
         if let Some(index) = self.lru_map.remove(&frame_id) {
             self.lru_list.remove(index);
             // 如果索引比index大 则减一
@@ -45,11 +49,12 @@ impl LRUReplacer {
                 }
             }
         }else{
-            println!("the frame_id = {}, not in the list", frame_id);
+            // println!("the frame_id = {}, not in the list", frame_id);
         }
     }
 
     fn unpin(&mut self, frame_id: FrameId) {
+        let _guard = self.latch.lock().unwrap();
         // 满了 或者已经存在了 就不用unpin了 unpin就是加入哈希表
         if self.lru_map.len() >= self.total_pages || self.lru_map.contains_key(&frame_id) {
             return;
@@ -67,6 +72,7 @@ impl LRUReplacer {
     }
 
     fn size(&self) -> usize {
+        let _guard = self.latch.lock().unwrap();
         self.lru_map.len()
     }
 }
